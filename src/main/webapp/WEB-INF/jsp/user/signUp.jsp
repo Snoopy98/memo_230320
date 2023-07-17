@@ -85,5 +85,64 @@
 			
 		}); // 중복확인 버튼
 		
+		// 회원가입
+		$('#signUpForm').on("submit",function(e){
+			e.preventDefault();
+			
+			//validation
+			let loginId = $('input[name=loginId]').val().trim();
+			let password = $('#password').val();
+			let confirmPassword = $('#confirmPassword').val();
+			let name = $('#name').val().trim();
+			let email = $('#email').val().trim();
+			
+			if(!loginId){
+				alert("아이디를 입력해주세요.");
+				return false;
+			}
+			if(!password || !confirmPassword){
+				alert("비밀번호를 입력하세요.");
+				return false;
+			}
+			if(password != confirmPassword){
+				alert("비밀번호가 일치하지않습니다.")
+				return false;
+			}
+			if(!name){
+				alert("이름을 입력해주세요.");
+				return false;
+			}
+			if(!email){
+				alert("이메일을 입력해주세요.")
+				return false;
+			}	
+			// 아이디 중복확인 완료 됬는지 확인 => idCheck d-none 이면 참
+			if($('#idCheckOk').hasClass("d-none")){
+				alert("아이디 중복확인을 다시해주세요.");
+				return false;
+			}
+			// 서버로 보내는 방법 두가지
+			// 1. form submit 을 자바 스크립트로 진행 시킴
+			//$(this)[0].submit(); // 화면 이동을 반드시 해야한다. 컨트롤러가 redirect 또는 jsp
+			
+			//2) ajax 호출  컨트롤러가 JSON 호출
+			let url = $(this).attr('action');
+			console.log(url);
+			let params = $(this).serialize(); // form 태그에 있는 name 속성에 있는 값들로 파라미터 구성
+			console.log(params);
+			
+			$.post(url, params)   // request
+			.done(function(data) {
+				// response
+				if (data.code == 1) {
+					alert("가입을 환영합니다! 로그인을 해주세요.");
+					location.href = "/user/sign_in_view"; // 로그인 화면으로 이동
+				} else {
+					// 로직 실패
+					alert(data.errorMessage);
+				}
+			});
+		});
+			
 	}); // ready
 </script>
