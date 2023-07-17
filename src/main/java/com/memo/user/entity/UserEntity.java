@@ -32,8 +32,6 @@ public class UserEntity {
 	private String password;
 	private String name;
 	private String email;
-	@Column(name = "profileImageUrl" )
-	private String profileImageUrl;
 	@UpdateTimestamp
 	@Column(name = "createdAt", updatable = false)
 	private ZonedDateTime createdAt;
