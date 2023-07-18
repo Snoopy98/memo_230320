@@ -50,7 +50,7 @@ $(document).ready(function(){
 	 let params = $(this).serialize(); // name 속성이 반드시 있어야한다.
 	 console.log(params);
 	 
-	 $.post(url,params); // url 에 요청 파람스 보낸다. request
+	 $.post(url,params) // url 에 요청 파람스 보낸다. request
 	 .done(function(data){ // response
 		 if(data.code == 1){
 			 // 성공

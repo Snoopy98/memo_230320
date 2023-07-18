@@ -18,7 +18,7 @@
 		<header class="">
 			<jsp:include page="../include/header.jsp"/>
 		</header>
-		<section class="contents">
+		<section class="contents py-3">
 			<jsp:include page="../${view}.jsp"/>
 		</section>
 		<footer class="">
