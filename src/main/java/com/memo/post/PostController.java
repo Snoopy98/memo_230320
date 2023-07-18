@@ -19,22 +19,26 @@ public class PostController {
 	@Autowired
 	private PostBO postBO;
 	
-	
+	/**
+	 * 
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/post_list_view")
-	public String postListView(Model model, HttpSession session) {
+	public String postListView(HttpSession session, Model model) {
 		// 로그인 여부 조회
 		Integer userId = (Integer)session.getAttribute("userId");
-		if(userId == null) {
-			// 비로그인 이면 로그인 페이지로 이동
+		if (userId == null) {
+			// 비로그인이면 로그인 페이지로 이동
 			return "redirect:/user/sign_in_view";
 		}
 		
-		
-		//DB 글 목록 조회
+		// DB 글 목록 조회
 		List<Post> postList = postBO.getPostListByUserId(userId);
-		model.addAttribute("postList",postList);
 		
-		model.addAttribute("view","post/postList");
+		model.addAttribute("postList", postList);
+		model.addAttribute("view", "post/postList");
 		return "template/layout";
 	}
 	/**

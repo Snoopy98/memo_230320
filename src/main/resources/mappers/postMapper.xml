@@ -9,7 +9,7 @@
  				`post`
  	
  	</select>
- 	<select id="selectPostListByUserId" resultType="com.memo.post.domain.Post">
+ 	<select id="selectPostListByUserId" parameterType="int" resultType="com.memo.post.domain.Post">
  		SELECT 
  			`id`
 			,`userId`
